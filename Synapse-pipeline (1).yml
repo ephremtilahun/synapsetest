@@ -1,0 +1,100 @@
+resources:
+- repo: self
+  clean: true
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - template.json
+
+variables:
+  - group: azure-connection
+  - group: azure-tags
+  - group: azure-databricks
+
+  
+stages:
+
+- stage: build
+  #condition: contains(variables['Build.SourceBranch'], 'refs/heads/master')
+  jobs:
+  - job: publishArtifacts
+    displayName: 'publish the artifacts'
+    pool:
+     vmImage: 'ubuntu-latest'
+    steps:
+    - bash: |
+       mkdir -p "$(Build.ArtifactStagingDirectory)/arm_template"
+       cp template.json "$(Build.ArtifactStagingDirectory)/arm_template/"
+       cp parameters.json "$(Build.ArtifactStagingDirectory)/arm_template/"
+      
+       echo 'path'
+       echo $(Build.ArtifactStagingDirectory)
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish ARM Template Build Artifacts
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/arm_template'
+        artifactName: arm_template 
+ 
+
+- stage: release
+  #condition: contains(variables['Build.SourceBranch'], 'refs/heads/master')
+  jobs:
+  
+  - job: deploy_azure_synapse
+    displayName: 'Deploy Synapse'
+    timeoutInMinutes: 30
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          if [ $(az group exists --name $(rgName) ) == false ]; then {
+              echo "[INFO] Resource group does not exist, creating.."
+              az group create --name $(rgName) --location $(region)
+          } else {
+              echo "[INFO] Resource group already exists"
+              #exit 1
+          }
+          fi
+        failOnStandardError: true
+      displayName: 'Create Resource Group'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          VALIDATION_OUTPUT=$(az deployment group validate --resource-group '$(rgName)' --template-file 'template.json' --parameters 'parameters.json' | jq --raw-output '.error')
+          if [[ ${VALIDATION_OUTPUT} = "null" ]]; then {
+              echo "[INFO] validation passed successfully"
+          } else {
+              echo "[ERROR] validation failed: ${VALIDATION_OUTPUT}"
+              exit 1
+          }
+          fi
+      displayName: 'Validate Template'
+      
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az deployment group create --name '$(Build.BuildNumber)' --resource-group '$(rgName)'  --template-uri 'template.json' --parameters 'parameters.json'
+        failOnStandardError: true
+      displayName: 'Deploy Synapse'
+  
+
+   
+  

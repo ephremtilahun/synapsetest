@@ -1,0 +1,90 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "snapsews104"
+        },
+        "location": {
+            "value": "southcentralus"
+        },
+        "defaultDataLakeStorageAccountName": {
+            "value": "swissredlla"
+        },
+        "defaultDataLakeStorageFilesystemName": {
+            "value": "no1"
+        },
+        "sqlAdministratorLogin": {
+            "value": "sqladminuser"
+        },
+        "sqlAdministratorLoginPassword": {
+            "value": "C@r0lin@354!"
+        },
+        "setWorkspaceIdentityRbacOnStorageAccount": {
+            "value": true
+        },
+        "allowAllConnections": {
+            "value": true
+        },
+        "grantWorkspaceIdentityControlForSql": {
+            "value": "Enabled"
+        },
+        "managedVirtualNetwork": {
+            "value": ""
+        },
+        "tagValues": {
+            "value": {}
+        },
+        "storageSubscriptionID": {
+            "value": "c91d6dfc-4d7d-4f6a-88ca-06bcd59c4bd7"
+        },
+        "storageResourceGroupName": {
+            "value": "SwissreLifeHealth"
+        },
+        "storageLocation": {
+            "value": "southcentralus"
+        },
+        "storageRoleUniqueId": {
+            "value": "81c03334-b1fe-4bc0-830c-d45b29ece00f"
+        },
+        "isNewStorageAccount": {
+            "value": false
+        },
+        "isNewFileSystemOnly": {
+            "value": false
+        },
+        "adlaResourceId": {
+            "value": ""
+        },
+        "managedResourceGroupName": {
+            "value": ""
+        },
+        "storageAccessTier": {
+            "value": "Hot"
+        },
+        "storageAccountType": {
+            "value": "Standard_RAGRS"
+        },
+        "storageSupportsHttpsTrafficOnly": {
+            "value": true
+        },
+        "storageKind": {
+            "value": "StorageV2"
+        },
+        "storageIsHnsEnabled": {
+            "value": true
+        },
+        "userObjectId": {
+            "value": "a69b02fe-798b-4211-ae64-2ec5c71be5c0"
+        },
+        "setSbdcRbacOnStorageAccount": {
+            "value": false
+        },
+        "setWorkspaceMsiByPassOnStorageAccount": {
+            "value": false
+        },
+        "workspaceStorageAccountProperties": {
+            "value": {}
+        }
+    }
+}
