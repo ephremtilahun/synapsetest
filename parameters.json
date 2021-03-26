@@ -18,7 +18,7 @@
             "value": "sqladmin"
         },
         "sqlAdministratorLoginPassword": {
-            "value": null
+            "value": "kidSol@513"
         },
         "setWorkspaceIdentityRbacOnStorageAccount": {
             "value": true
