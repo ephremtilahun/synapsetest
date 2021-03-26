@@ -5,6 +5,32 @@
         "name": {
             "type": "string"
         },
+        "sku": {
+      "type": "string",
+      "defaultValue": "DW100c",
+      "allowedValues": [
+        "DW100c",
+        "DW200c",
+        "DW300c",
+        "DW400c",
+        "DW500c",
+        "DW1000c",
+        "DW1500c",
+        "DW2000c",
+        "DW2500c",
+        "DW3000c"
+      ],
+      "metadata": {
+        "description": "Select the SKU of the SQL pool."
+      }
+    },
+    "metadataSync": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Choose whether you want to synchronise metadata."
+      }
+        },
         "location": {
             "type": "string"
         },
@@ -112,7 +138,8 @@
     },
     "variables": {
         "storageBlobDataContributorRoleID": "ba92f5b4-2d11-453d-a403-e96b0029c9fe",
-        "defaultDataLakeStorageAccountUrl": "[concat('https://', parameters('defaultDataLakeStorageAccountName'), '.dfs.core.windows.net')]"
+        "defaultDataLakeStorageAccountUrl": "[concat('https://', parameters('defaultDataLakeStorageAccountName'), '.dfs.core.windows.net')]",
+        "sqlPoolName": "[toLower(concat(parameters('name'),'p1'))]"
     },
     "resources": [
         {
@@ -170,7 +197,39 @@
             ],
             "tags": "[parameters('tagValues')]"
         },
-        {
+            {
+                "type": "Microsoft.Synapse/workspaces/sqlPools",
+                "apiVersion": "2019-06-01-preview",
+                "name": "[concat(parameters('name'), '/', parameters('sqlPoolName'))]",
+                "location": "[parameters('location')]",
+                "sku": {
+                  "name": "[parameters('sku')]"
+                },
+                "dependsOn": [
+                  "[parameters('name')]"
+                ],
+                "properties": {
+                  "createMode": "Default",
+                  "collation": "SQL_Latin1_General_CP1_CI_AS"
+                },
+                "resources": [
+                  {
+                    "condition": "[parameters('metadataSync')]",
+                    "type": "metadataSync",
+                    "apiVersion": "2019-06-01-preview",
+                    "name": "config",
+                    "location": "[parameters('location')]",
+                    "dependsOn": [
+                      "[parameters('sqlPoolName')]"
+                    ],
+                    "properties": {
+                      "Enabled": "[parameters('metadataSync')]"
+                    }
+                  }
+                ]
+              },
+          
+                {
             "condition": "[parameters('setWorkspaceIdentityRbacOnStorageAccount')]",
             "apiVersion": "2019-05-01",
             "name": "StorageRoleDeploymentResource",
@@ -234,7 +293,7 @@
                     "resources": [
                         {
                             "type": "Microsoft.Storage/storageAccounts",
-                            "apiVersion": "2020-08-01-preview",
+                            "apiVersion": "2021-01-01",
                             "location": "[parameters('storageLocation')]",
                             "name": "[parameters('defaultDataLakeStorageAccountName')]",
                             "properties": "[parameters('workspaceStorageAccountProperties')]"

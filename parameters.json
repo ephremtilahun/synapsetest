@@ -3,22 +3,22 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "value": "snapsews104"
+            "value": "ephnest"
         },
         "location": {
-            "value": "southcentralus"
+            "value": "eastus"
         },
         "defaultDataLakeStorageAccountName": {
-            "value": "swissredlla"
+            "value": "ephdeom"
         },
         "defaultDataLakeStorageFilesystemName": {
-            "value": "no1"
+            "value": "ephdemo"
         },
         "sqlAdministratorLogin": {
-            "value": "sqladminuser"
+            "value": "sqladmin"
         },
         "sqlAdministratorLoginPassword": {
-            "value": "C@r0lin@354!"
+            "value": null
         },
         "setWorkspaceIdentityRbacOnStorageAccount": {
             "value": true
@@ -36,19 +36,19 @@
             "value": {}
         },
         "storageSubscriptionID": {
-            "value": "c91d6dfc-4d7d-4f6a-88ca-06bcd59c4bd7"
+            "value": "b729126a-71f9-48f3-9f70-f2335c22501e"
         },
         "storageResourceGroupName": {
-            "value": "SwissreLifeHealth"
+            "value": "Ephrem1"
         },
         "storageLocation": {
-            "value": "southcentralus"
+            "value": "eastus"
         },
         "storageRoleUniqueId": {
-            "value": "81c03334-b1fe-4bc0-830c-d45b29ece00f"
+            "value": "0a4a6eaa-3008-4215-bbf0-bed9ff0d6011"
         },
         "isNewStorageAccount": {
-            "value": false
+            "value": true
         },
         "isNewFileSystemOnly": {
             "value": false
@@ -75,10 +75,10 @@
             "value": true
         },
         "userObjectId": {
-            "value": "a69b02fe-798b-4211-ae64-2ec5c71be5c0"
+            "value": "eab61699-a8a8-4ae5-bf92-3075b3125e90"
         },
         "setSbdcRbacOnStorageAccount": {
-            "value": false
+            "value": true
         },
         "setWorkspaceMsiByPassOnStorageAccount": {
             "value": false
