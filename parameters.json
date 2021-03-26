@@ -1,0 +1,90 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "ephnest"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "defaultDataLakeStorageAccountName": {
+            "value": "ephdeom"
+        },
+        "defaultDataLakeStorageFilesystemName": {
+            "value": "ephdemo"
+        },
+        "sqlAdministratorLogin": {
+            "value": "sqladmin"
+        },
+        "sqlAdministratorLoginPassword": {
+            "value": null
+        },
+        "setWorkspaceIdentityRbacOnStorageAccount": {
+            "value": true
+        },
+        "allowAllConnections": {
+            "value": true
+        },
+        "grantWorkspaceIdentityControlForSql": {
+            "value": "Enabled"
+        },
+        "managedVirtualNetwork": {
+            "value": ""
+        },
+        "tagValues": {
+            "value": {}
+        },
+        "storageSubscriptionID": {
+            "value": "b729126a-71f9-48f3-9f70-f2335c22501e"
+        },
+        "storageResourceGroupName": {
+            "value": "Ephrem1"
+        },
+        "storageLocation": {
+            "value": "eastus"
+        },
+        "storageRoleUniqueId": {
+            "value": "0a4a6eaa-3008-4215-bbf0-bed9ff0d6011"
+        },
+        "isNewStorageAccount": {
+            "value": true
+        },
+        "isNewFileSystemOnly": {
+            "value": false
+        },
+        "adlaResourceId": {
+            "value": ""
+        },
+        "managedResourceGroupName": {
+            "value": ""
+        },
+        "storageAccessTier": {
+            "value": "Hot"
+        },
+        "storageAccountType": {
+            "value": "Standard_RAGRS"
+        },
+        "storageSupportsHttpsTrafficOnly": {
+            "value": true
+        },
+        "storageKind": {
+            "value": "StorageV2"
+        },
+        "storageIsHnsEnabled": {
+            "value": true
+        },
+        "userObjectId": {
+            "value": "eab61699-a8a8-4ae5-bf92-3075b3125e90"
+        },
+        "setSbdcRbacOnStorageAccount": {
+            "value": true
+        },
+        "setWorkspaceMsiByPassOnStorageAccount": {
+            "value": false
+        },
+        "workspaceStorageAccountProperties": {
+            "value": {}
+        }
+    }
+}
