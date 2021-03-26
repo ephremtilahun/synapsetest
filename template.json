@@ -139,7 +139,7 @@
     "variables": {
         "storageBlobDataContributorRoleID": "ba92f5b4-2d11-453d-a403-e96b0029c9fe",
         "defaultDataLakeStorageAccountUrl": "[concat('https://', parameters('defaultDataLakeStorageAccountName'), '.dfs.core.windows.net')]",
-        "sqlPoolName": "[toLower(concat(parameters('name'),'p1'))]"
+        "sqlPoolName": "[eppool(concat(parameters('name'),'p1'))]"
     },
     "resources": [
         {
